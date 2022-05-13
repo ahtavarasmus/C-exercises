@@ -5,15 +5,15 @@
 int main(void)
 {
 	int i;
-	int t[1000];
-	for (i = 0; i < 10; i++){
-		t[i] = (rand() % 9) + 1;
+	int t[20];
+	for (i = 0; i < 20; i++){
+		t[i] = (rand() % (10 - 1 + 1)) + 1;
 		printf("%d\n",t[i]);
 	}
 	printf("*********************************************\n");
 
-	pikalajittele(0,9,t);
-	for (i = 0; i < 10; i++)
+	pikalajittele(0,19,t);
+	for (i = 0; i < 20; i++)
 		printf("%d\n", t[i]);
 	return 0;
 }

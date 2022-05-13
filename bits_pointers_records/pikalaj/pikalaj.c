@@ -7,6 +7,7 @@ void pikalajittele(int alku, int loppu, int t[])
 {
 	int a, b, x, y, xr, yr;
 	unsigned int a_tmp,b_tmp;
+	int *t_tmp;
 	IntPari correct_pair;
 	if (alku >= loppu)
 		return;
@@ -25,7 +26,8 @@ void pikalajittele(int alku, int loppu, int t[])
 	a_tmp = a - alku;
 	b_tmp = b - alku;
 
-	correct_pair = kolmijako(loppu-alku,&t[alku],a_tmp,b_tmp,&x,&y);
+
+	correct_pair = kolmijako(loppu-alku+1,t+alku,a_tmp,b_tmp,&x,&y);
 	xr = correct_pair.x + alku;
 	yr = correct_pair.y + alku;
 
