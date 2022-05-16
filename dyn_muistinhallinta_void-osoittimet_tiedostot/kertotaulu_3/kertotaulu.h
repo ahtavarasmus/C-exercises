@@ -5,7 +5,7 @@ struct Kertotaulu {
 	uint c;
 	uint d;
 	uint ** kertotaulu;
-}
+};
 typedef struct Kertotaulu Kertotaulu;
 
 Kertotaulu * luoKertotaulu(uint a, uint b, uint c, uint d);
