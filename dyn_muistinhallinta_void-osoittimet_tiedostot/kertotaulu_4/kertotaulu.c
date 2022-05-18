@@ -1,79 +1,68 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "kertotaulu.h"
 
-char **luo_kertotaulu_mjt(uing a, uint b, uint c, uint d)
+char **luo_kertotaulu_mjt(uint a, uint b, uint c, uint d)
 {
-	int i,j;
+	int i,j,len,tmp,p_idx;
+	uint x;
 	int leveydet[(b-a+2)];
 	char ** k;
+	int m;
 	int rivien_leveys;
+	char vali = ' ';
 	for (i = 0; i < (d-c+2); i++){
 		for (j = 0; j < (b-a+2); j++){
-			if (j == 0)
-				leveydet[i] = d;
-			else
-				leveydet[i] = d*(a+j-1);
+			if (j == 0) tmp = d;
+			else tmp = d*(a+j-1);
+
+			len = 1;
+			for (; tmp > 9; tmp/=10)
+				len += 1;
+			leveydet[j] = len;
 		}
 	}
 
 	/* rivien_leveys alustetaan jokaisen sarakkeen väliin jäävillä välilyönneillä*/
-	rivien_leveys = (d-c+2)-1;
-	for (i = 0; i < (d-c+2); i++){
-		rivien_leveys += leveydet[i];
+
+	rivien_leveys = (b-a+2)-1;
+	for (j = 0; j < (b-a+2); j++){
+		rivien_leveys += leveydet[j];
 	}
+	/*lopetusmerkki*/
+	rivien_leveys++;
 
 	k = malloc((d-c+2)*sizeof(char *));
 	for (i = 0; i < (d-c+2); i++){
-		/* +1 tarkoittaa lopetusmerkkiä */
-		k[i] = malloc(rivien_leveys*sizeof(char)+1);
+		k[i] = malloc(rivien_leveys);
 	}
-
-	return k;
-}
-
-Kertotaulu * luoKertotaulu(uint a, uint b, uint c, uint d)
-{
-	int i,j;
-	Kertotaulu * k;	
-	if (a > b || c > d)
-		return NULL;
-	k = malloc(sizeof(Kertotaulu));
-
-	k->kertotaulu = malloc((d-c+2)*sizeof(uint * ));
-	for (i = 0; i < (d-c+2); i++){
-		k->kertotaulu[i] = malloc((b-a+2)*sizeof(uint));
-	}
-
+	p_idx = 0;
 	for (i = 0; i < (d-c+2);i++){
-		for (j = 0; j < (b-a+2);j++){
+		for (j = 0; j < (b-a+2); j++){
+
+			if (i == 0 && j == 0) x = 0;
+			else if (i == 0) x = a+j-1;
+			else if (j == 0) x = c+i-1; 
+			else x = (c+i-1)*(a+j-1);
+
+			m = leveydet[j];		
+			
 			if (i == 0 && j == 0)
-				k->kertotaulu[i][j] = 0;
-			else if (i == 0)
-				k->kertotaulu[i][j] = a+j-1;
-			else if (j == 0)
-				k->kertotaulu[i][j] = c+i-1;
+				tmp = sprintf(&k[i][p_idx],"%*c",m,vali);
 			else
-				k->kertotaulu[i][j] = (c+i-1)*(a+j-1);
+				tmp = sprintf(&k[i][p_idx],"%*u",m,x);
+			p_idx += tmp;
+			/* jos ei viimeinen luku */
+			if (j < b-a+1)
+				sprintf(&k[i][p_idx],"%c",vali);
+			p_idx++;
+			
 		}
+		p_idx = 0;
 	}
-	k->a = a;
-	k->b = b;
-	k->c = c;
-	k->d = d;
 
 	return k;
-
-}
-
-void tuhoaKertotaulu(Kertotaulu *kt)
-{
-	int i;
-	for (i = 0; i < (kt->d-kt->c+2);i++){
-		free(kt->kertotaulu[i]);
-	}
-	free(kt->kertotaulu);
-	free(kt);
 }
 
 
