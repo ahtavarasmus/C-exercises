@@ -12,6 +12,7 @@ char *fib_jono_mj(unsigned int n)
 	size_t m = 1;
 	
 	char *temp = NULL;
+	char *temp2 = NULL;
 	/* etu tulostetaan aina ennen uutta lukua */
 	char *etu = "";
 	/* varataan tilaa tyhjälle merkkijonolle(lopetusmerkille) */
@@ -40,11 +41,11 @@ char *fib_jono_mj(unsigned int n)
 			etu = ", ";
 			m+=3;
 		} else {
-			m++;
+			m+=1;
 		}
 		/* varataan lisää muistia jos tarvetta */
 		while (pit + m > kap){
-			kap*=2;
+			kap = kap*2;
 			rea = 1;
 		}
 		if (rea){
@@ -52,17 +53,18 @@ char *fib_jono_mj(unsigned int n)
 			if (temp != NULL)
 				mj = temp;
 		}
-				/* tulostetaan luku ja etu(pilkku,väli mahd.) */
+		/* tulostetaan luku ja etu(pilkku,väli mahd.) */
 		tmp = sprintf(&mj[pit],"%s%d",etu,curr);
 		/* kasvatetaan tulostettuja merkkejä */
 		pit += tmp;
 		rea = 0;
+		m = 1;
 	}
 	/* varataan lopuksi merkkijono vain sen tarvitsemien merkkien pituiseksi*/
 
-	temp = realloc(mj,pit + 1);
-	if (temp != NULL)
-		mj = temp;
+	temp2 = realloc(mj,pit + 1);
+	if (temp2 != NULL)
+		mj = temp2;
 
 	return mj;
 }
