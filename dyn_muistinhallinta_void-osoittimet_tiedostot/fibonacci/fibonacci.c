@@ -3,8 +3,10 @@
 
 unsigned int *fib_jono(unsigned int n)
 {
-	unsigned int i;
+	unsigned int x;
 	unsigned int* t = malloc(n*sizeof(unsigned int));
+	
+
 	for (i = 0; i < n; i++){
 		if (i < 2)
 			t[i] = i;
