@@ -32,7 +32,7 @@ IntPari kolmijako(unsigned int n, int t[], int vipu1, int vipu2, int *p1, int *p
 	tmp = t[idx];
 	t[idx] = t[vipu1];
 	t[vipu1] = tmp;
-	/* first i mean x point assignement seremony:) */
+	/* first i mean x point assignment seremony:) */
 	*p1 = idx;
 	new_pair.x = idx;
 	idx++;
