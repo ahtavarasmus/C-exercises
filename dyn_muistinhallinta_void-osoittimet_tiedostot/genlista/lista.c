@@ -5,21 +5,21 @@
 
 Solmu * s_luo(const void * data, size_t dataKoko, Solmu *seur)
 {
-  Solmu *ds = malloc(sizeof(Solmu));
-  ds->data = malloc(sizeof(dataKoko));
-  memcpy(ds->data, data,dataKoko);
-  ds->seur = seur;
-  return ds;
+	Solmu *ds = malloc(sizeof(Solmu));
+	ds->data = malloc(sizeof(dataKoko));
+	memcpy(ds->data, data,dataKoko);
+	ds->seur = seur;
+	return ds;
 }
 
 Lista * ll_luo(size_t dataKoko,void (*tulostaArvo)(FILE *virta, const void *arvo))
 {
-  Lista *dl = malloc(sizeof(Lista));
-  dl->tulostaArvo = tulostaArvo;
-  dl->dataKoko = dataKoko;
-  dl->n = 0;
-  dl->paa = NULL;
-  return dl;
+  	Lista *dl = malloc(sizeof(Lista));
+  	dl->tulostaArvo = tulostaArvo;
+  	dl->dataKoko = dataKoko;
+  	dl->n = 0;
+  	dl->paa = NULL;
+  	return dl;
 }
 
 void ll_tuhoa(Lista *dl)
@@ -40,15 +40,13 @@ Solmu * ll_lisaaEteen(Lista *dl,const void * arvo)
 
 void ll_poistaEdesta(Lista *dl)
 {
-  void * arvo = 0;
   if(dl->n > 0)
   {
-    Solmu *vanhaPaa = dl->paa;
-    arvo = dl->paa->data;
-    dl->paa = dl->paa->seur;
-    free(arvo);
-    free(vanhaPaa);
-    dl->n -= 1;
+	Solmu* rm = dl->paa;
+	dl->paa = dl->paa->seur;
+    	free(rm->data);
+    	free(rm);
+    	dl->n -= 1;
   }
 }
 
