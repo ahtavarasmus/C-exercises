@@ -6,7 +6,7 @@
 Solmu * s_luo(const void * data, size_t dataKoko, Solmu *seur)
 {
 	Solmu *ds = malloc(sizeof(Solmu));
-	ds->data = malloc(sizeof(dataKoko));
+	ds->data = malloc(dataKoko);
 	memcpy(ds->data, data,dataKoko);
 	ds->seur = seur;
 	return ds;
